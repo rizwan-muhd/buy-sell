@@ -1,3 +1,15 @@
+.postParentDiv{
+  /* position: relative; */
+  /* width: 200px; */
+  /* height: 100px; */
+  /* outline: 1px solid lime; */
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.postParentDiv::-webkit-scrollbar{
+  display: none;
+}
+
 .moreView {
   margin: 16px 16px 24px;
   padding: 16px 16px 32px;
@@ -31,11 +43,14 @@
   overflow-y: hidden;
 }
 
+#quickmenu_cards::-webkit-scrollbar{
+  display: none;
+}
 .card {
   margin-right: 15px;
   padding: 13px;
-  max-width: 222px;
-  width: 222px;
+  /* max-width: 222px; */
+  width:16rem;
   height: 270px;
   display: inline-block;
   cursor: pointer;
@@ -84,4 +99,8 @@
 .recommendations .heading span {
   font-size: 24px;
   color: #002f34;
+}
+
+#itemcards{
+  display: block;
 }

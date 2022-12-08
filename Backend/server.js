@@ -4,8 +4,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 // const md5 = require("md5");
 
-const signupRoute = require("./routes/routes");
+const signupRoute = require("./routes/signup");
 const loginRoute = require("./routes/login");
+const addproductRoute = require("./routes/products");
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use(cors());
 app.use("/api", signupRoute);
 app.use("/api", loginRoute);
+app.use("/api", addproductRoute);
 
 app.listen(5000, () => {
   console.log("server running on port 5000");

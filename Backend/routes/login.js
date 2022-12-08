@@ -7,17 +7,16 @@ router.post("/login", async (req, res) => {
   try {
     // console.log("entered in try");
     // console.log(req.body);
-
     // const { error } = validate(req.body);
     // console.log("body", error);
-
     // const error = req.body;
-    console.log(req.body);
+    // console.log(req.body);
 
     // if (error) {
     //   return res.status(400).send({ message: error.details[0].message });
     // }
     const user = await User.findOne({ email: req.body.email });
+
     if (!user) {
       return res.status(401).send({ message: "invalid email address" });
     }
@@ -34,7 +33,29 @@ router.post("/login", async (req, res) => {
     const token = user.generateAuthToken();
     console.log(token);
 
-    res.status(200).send({ data: token, message: "logged successfully" });
+    console.log(user);
+    res
+      .status(200)
+      .send({ data: token, user: user, message: "logged successfully" });
+
+    // const email = req.body.email;
+    // router.get("/login", async (req, res, email) => {
+    //   // console.log(req.body);
+
+    //   await User.findOne({ email: email }, (err, result) => {
+    //     if (err) {
+    //       res.send(err);
+    //     }
+    //     res.status(200).send(result);
+    //   });
+    // });
+
+    //   await User.findOne({ email: req.body.email }, (err, result) => {
+    //     if (err) {
+    //       res.send(err);
+    //     }
+    //     res.status(200).send(result);
+    //   });
   } catch (error) {
     res.status(500).send({ message: "internal error" });
   }
