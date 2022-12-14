@@ -18,8 +18,10 @@ const productSchema = new mongoose.Schema({
     required: true,
   },
   image: {
-    data: Buffer,
-    condentType: String,
+    // data: Buffer,
+    // condentType: String,
+    type: Array,
+    required: true,
   },
   place: {
     type: String,

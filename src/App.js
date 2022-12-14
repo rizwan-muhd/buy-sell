@@ -8,6 +8,8 @@ import Signup from "./Pages/Signup";
 // import Create from "./Pages/Create";
 import CreatePage from "./Pages/Create";
 import PostDetails from "./store/postContext";
+import Profile from "./Components/Signup/Profile";
+import AccountPage from "./Pages/Account";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -21,11 +23,17 @@ function App() {
           <Route path="/signup">
             <Signup />
           </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
           {/* <Route path="/">
           <Login />
         </Route> */}
           <Route path="/viewpost">
             <ViewPost />
+          </Route>
+          <Route path="/account">
+            <AccountPage />
           </Route>
           <Route path="/create" exact>
             {user ? <CreatePage /> : <Signup />}

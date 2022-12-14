@@ -1,26 +1,26 @@
 .viewParentDiv {
-  padding-top: 4em;
-  display: flex;
+  padding:2rem;
+  /* display: flex; */
 }
 .viewParentDiv .imageShowDiv {
   /* padding: 50px; */
   text-align: center;
-  width: 60vw;
+  /* width: 60vw; */
   border: 1px solid;
   border-radius: 5px;
-  margin-left: 2rem;
+  /* margin-left: 2rem; */
 }
 .imageShowDiv img {
-  width:50%;
+  /* width:50%; */
   height: 60vh;
   padding: 3rem;
  
 }
 
 .viewParentDiv .rightSection {
-  padding: 16px;
+  /* padding: 16px; */
   /* margin-top: 3em; */
-  width: 30vw;
+  /* width: 30vw; */
 }
 
 .viewParentDiv .rightSection .productDetails :first-child {

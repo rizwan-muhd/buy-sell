@@ -1,7 +1,14 @@
-.footerParentDiv {
-  width: 100vw;
+.footer {
+  /* position:absolute; */
+  /* display: inline-block; */
+  /* height: 50px; */
+  bottom: 0px; 
+  /* left: 0px; */
+  /* right: 0px; */
+  /* margin-bottom: 0px;  */
+  width: 100%;
 }
-.footerParentDiv .content {
+/* .footerParentDiv .content {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,4 +31,4 @@
 
 .footerParentDiv .footer p {
   margin: 0;
-}
+} */

@@ -1,4 +1,5 @@
 import React from "react";
+import NewFooter from "../Components/Footer/NewFooter";
 // import Footer from "../Components/Footer/Footer";
 
 // import Header from "../Components/Header/Header";
@@ -12,6 +13,7 @@ function ViewPost(props) {
       <ResponsiveAppBar />
       <View />
       {/* <Footer /> */}
+      <NewFooter />
     </div>
   );
 }

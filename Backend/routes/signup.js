@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 
 const router = express();
 
+//post request for signup
 router.post("/signup", async (req, res) => {
   try {
     console.log(req.body);
@@ -23,6 +24,7 @@ router.post("/signup", async (req, res) => {
     const hashPassword = await bcrypt.hash(req.body.password, salt);
 
     await new User({ ...req.body, password: hashPassword }).save();
+
     res.status(201).send({ message: "user created succesfully" });
   } catch (error) {
     res.status(500).send({ message: "internal server error" });
@@ -44,44 +46,17 @@ router.post("/signup", async (req, res) => {
   //     res.status(401).json(err);
   //   });
 });
-// router.post("/login", async (req, res) => {
 
-//   try {
-//     const
-//   }
-//   catch (error) {
+//get userdata
+router.get("/getuser", async (req, res) => {
+  const user_id = req.query.id;
+  const user = await User.findOne({ _id: user_id });
+  res.status(200).send({ user });
+  // .catch((err) => {
+  //   console.log(err);
+  // });
+});
 
-//   }
-
-// router.post("/login", async (req, res) => {
-
-//   try {
-//     const
-//   }
-//   catch (error) {
-
-//   }
-// console.log(req.body);
-
-// const user = await User.findOne({
-//   email: req.body.email,
-//   password: req.body.password,
-// });
-// console.log(user);
-
-// if (user) {
-//   return res.status(201).json({
-//     status: "ok",
-//     user: true,
-//     message: "succesfully logined",
-//   });
-// } else {
-//   return res.status(401).json({
-//     status: "error",
-//     user: false,
-//     message: "incorrect user or password",
-//   });
-// }
-// });
+router.post("/userupdate", (req, res) => {});
 
 module.exports = router;

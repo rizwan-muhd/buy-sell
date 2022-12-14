@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { postDetailsContext } from "../../store/postContext";
 import { useHistory } from "react-router-dom";
+// import axios from "axios";
 
 function Posts() {
   const history = useHistory();
@@ -25,6 +26,8 @@ function Posts() {
         settotalPages(totalPages);
         setState((prev) => [...prev, ...products]);
         console.log(totalpages);
+
+        console.log(state);
       });
     // .then(() => {
     //   axios.get("http://localhost:5000/api/getquickproducts").then((res) => {
@@ -88,6 +91,7 @@ function Posts() {
                   <Paper
                     sx={{
                       margin: "10px",
+                      textAlign: "start",
                     }}
                     className="card"
                     value={key}
@@ -109,7 +113,9 @@ function Posts() {
                     <div className="content">
                       <p className="rate">&#x20B9;{obj.price}</p>
                       <span className="kilometer">{obj.category}</span>
-                      <p className="name"> {obj.productname}</p>
+                      <p className="name" style={{ marginBottom: "0px" }}>
+                        {obj.productname}
+                      </p>
                     </div>
                     <div className="date">
                       <span>{obj.date}</span>

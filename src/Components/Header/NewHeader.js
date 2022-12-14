@@ -1,7 +1,10 @@
+//react components importing
 import * as React from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+
+//mui components importing
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -22,12 +25,8 @@ import AppleIcon from "@mui/icons-material/Apple";
 import Modal from "@mui/material/Modal";
 import Paper from "@mui/material/Paper";
 import { styled, alpha } from "@mui/material/styles";
-
+// import Badge from "@mui/material/Badge";
 import Logo from "../../olx-logo.png";
-import OlxLogo from "../../assets/OlxLogo";
-
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Login"];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -84,8 +83,22 @@ const style = {
   p: 4,
 };
 
+//main function
 function ResponsiveAppBar() {
+  //localstorage item getting
   const user = localStorage.getItem("token");
+  const userName = localStorage.getItem("userName");
+
+  // console.log(userName.toUpperCase());
+  // console.log(userName.slice(0, 1));
+  const pages = ["home", "favourites", "products"];
+
+  const settings = ["Profile", "Account"];
+  if (user) {
+    settings.push("Logout");
+  } else {
+    settings.push("Login");
+  }
   const history = useHistory();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -94,6 +107,8 @@ function ResponsiveAppBar() {
     email: "",
     password: "",
   });
+  // const [userName, setuserName] = useState("");
+
   const [value, setValue] = React.useState(null);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -112,6 +127,8 @@ function ResponsiveAppBar() {
   const handleLogin = (val) => {
     setOpen(true);
     localStorage.removeItem("token");
+    localStorage.removeItem("userName");
+    // localStorage.clear();
   };
 
   const handleSubmit = async (e) => {
@@ -122,11 +139,13 @@ function ResponsiveAppBar() {
       await axios.post(url, loginData).then((res) => {
         localStorage.setItem("token", res.data.data);
         localStorage.setItem("userId", res.data.user._id);
+        localStorage.setItem("userName", res.data.user.name);
         console.log(res.data);
         console.log(res.data.message);
         console.log(res.data.user);
         // setUserDetails(res.data.user);
-
+        // setuserName(res.data.user.name);
+        console.log(res.data.user.name);
         setOpen(false);
         // history.push("/");  const { data: res } =
       });
@@ -139,15 +158,6 @@ function ResponsiveAppBar() {
         setError(error.response.data.message);
       }
     }
-    // console.log(loginData);
-    // axios
-    //   .post("", loginData)
-    //   .then(() => {
-    //     History.push("/");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   };
 
   const handleCreate = (user) => {
@@ -161,18 +171,34 @@ function ResponsiveAppBar() {
   };
 
   const handleCloseNavMenu = () => {
+    alert("hello");
+
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (setting) => {
     setAnchorElUser(null);
+
+    if (setting === "Login") {
+      // alert("login page");
+
+      handleLogin();
+
+      // history.push("/signup");
+    } else if (setting === "Logout") {
+      handleLogin();
+    } else if (setting === "Profile") {
+      history.push("/profile");
+    } else if (setting === "Account") {
+      history.push("/account");
+    }
   };
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
@@ -227,7 +253,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
           <Typography
             variant="h5"
             noWrap
@@ -239,12 +265,12 @@ function ResponsiveAppBar() {
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
+              // letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            LOGO
+            Buy & Sell
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
@@ -257,7 +283,7 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-          <Box>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -269,7 +295,7 @@ function ResponsiveAppBar() {
             </Search>
           </Box>
           <Box>
-            {user && (
+            {/* {user && (
               <Button
                 variant="contained"
                 onClick={handleLogin}
@@ -277,7 +303,7 @@ function ResponsiveAppBar() {
               >
                 Logout
               </Button>
-            )}
+            )} */}
             {user && (
               <Button
                 variant="contained"
@@ -292,7 +318,11 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                {/* {console.log(userName.toUpperCase())} */}
+                <Avatar
+                  alt={userName && userName.toUpperCase()}
+                  src={userName && userName.toUpperCase()}
+                />
               </IconButton>
             </Tooltip>
             <Menu
@@ -312,20 +342,11 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography
-                    textAlign="center"
-                    onClick={() => {
-                      if (setting === "Login") {
-                        alert("login page");
-                        handleLogin();
-
-                        // history.push("/signup");
-                      }
-                    }}
-                  >
-                    {setting}
-                  </Typography>
+                <MenuItem
+                  key={setting}
+                  onClick={() => handleCloseUserMenu(setting)}
+                >
+                  <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>

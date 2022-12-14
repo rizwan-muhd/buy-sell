@@ -4,8 +4,10 @@ import React from "react";
 import Banner from "../Components/Banner/Banner";
 
 import Posts from "../Components/Posts/Posts";
-import Footer from "../Components/Footer/Footer";
+// import Footer from "../Components/Footer/Footer";
 import ResponsiveAppBar from "../Components/Header/NewHeader";
+import NewFooter from "../Components/Footer/NewFooter";
+// import FooterOne from "../Components/Footer/NewFooter";
 
 function Home(props) {
   return (
@@ -14,7 +16,8 @@ function Home(props) {
       {/* <Header /> */}
       <Banner />
       <Posts />
-      <Footer />
+      {/* <Footer /> */}
+      <NewFooter />
     </div>
   );
 }

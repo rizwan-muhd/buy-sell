@@ -19,6 +19,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
+import Badge from "@mui/material/Badge";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 
 //css files importing

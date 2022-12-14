@@ -1,7 +1,8 @@
 // import React, { Fragment } from "react";
 // import Header from "../Components/Header/Header";
 import Create from "../Components/Create/Create";
-import Footer from "../Components/Footer/Footer";
+import NewFooter from "../Components/Footer/NewFooter";
+// import Footer from "../Components/Footer/Footer";
 import ResponsiveAppBar from "../Components/Header/NewHeader";
 
 function CreatePage() {
@@ -11,7 +12,8 @@ function CreatePage() {
       <ResponsiveAppBar />
       <Create />
 
-      <Footer />
+      {/* <Footer /> */}
+      <NewFooter />
     </div>
   );
 }
