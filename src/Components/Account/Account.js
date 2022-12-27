@@ -38,7 +38,7 @@ const style = {
 };
 
 function Account() {
-  const flag = false;
+  // const flag = false;
 
   const [state, setState] = React.useState({
     open: false,

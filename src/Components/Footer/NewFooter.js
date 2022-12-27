@@ -6,7 +6,7 @@ function NewFooter() {
     // <div>
     <footer
       class="footer text-center text-lg-start text-white"
-      style={{ backgroundColor: "slategrey" }}
+      style={{ backgroundColor: "hsl(210deg 8% 15%)", color: "GrayText" }}
     >
       {/* <!-- Grid container --> */}
       <div class="container p-4">

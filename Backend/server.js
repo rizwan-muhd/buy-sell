@@ -1,8 +1,8 @@
 require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
+
 const cors = require("cors");
-// const md5 = require("md5");
+const connection = require("./database/db.js");
 
 const signupRoute = require("./routes/signup");
 const loginRoute = require("./routes/login");
@@ -10,13 +10,16 @@ const addproductRoute = require("./routes/products");
 
 const app = express();
 
-main().catch((err) => console.log(err));
+connection();
+// main().catch((err) => console.log(err));
 
-async function main() {
-  await mongoose.connect("mongodb://localhost:27017/olx", {
-    useNewUrlParser: true,
-  });
-}
+// async function main() {
+//   const MONGODB_URL =
+//     "mongodb+srv://user01:MC8biL0ifg0TCtTi@todoapp.ij4lfkd.mongodb.net/?retryWrites=true&w=majority";
+//   await mongoose.connect(MONGODB_URL, {
+//     useNewUrlParser: true,
+//   });
+// }
 // console.log(md5(123));
 
 app.use(express.json());

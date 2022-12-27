@@ -2,21 +2,19 @@ const express = require("express");
 const productSchema = require("../modals/productmodals");
 const { User } = require("../modals/modal");
 const multer = require("multer");
-// const path = require("path");
+const path = require("path");
 
 const router = express();
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(
-      null,
-      "/home/rizwan/Documents/react/React_tutorial_olx_clone/public/uploads"
-    );
+    let dest = path.join(__dirname, "../../public/uploads");
+    callback(null, dest);
   },
   filename: (req, file, callback) => {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
     // callback(null, Date.now() + file.originalname);
-    callback(null, file.fieldname + "-" + uniqueSuffix);
+    callback(null, uniqueSuffix + "-" + file.originalname);
   },
 });
 
@@ -26,26 +24,33 @@ const upload = multer({ storage: storage });
 //   console.log("new body" + req.body);
 // });
 
-router.post("/addproduct", upload.array("image", 5), async (req, res) => {
-  console.log("enter in server");
+router.post("/addproduct", upload.single("image"), async (req, res) => {
+  try {
+    console.log(__dirname);
 
-  const items = await new productSchema({
-    productname: req.body.productname,
-    userId: req.body.userId,
-    category: req.body.category,
-    price: req.body.price,
-    // image: req.file.originalname,
-    image: req.files.name,
-    date: req.body.date,
-    place: req.body.place,
-  });
+    console.log("enter in try");
 
-  // console.log("data" + items);
+    console.log(req.body);
+    console.log(req.files);
 
-  items
-    .save()
-    .then((res) => res.json("products added"))
-    .catch((err) => res.status(400).json(`error:${err}`));
+    const items = await new productSchema({
+      productname: req.body.productname,
+      userId: req.body.userId,
+      category: req.body.category,
+      price: req.body.price,
+      image: req.file.filename,
+      // image: req.files,
+      date: req.body.date,
+      place: req.body.place,
+    });
+
+    items
+      .save()
+      .then((res) => res.json("products added"))
+      .catch((err) => res.status(400).json(`error:${err}`));
+  } catch (err) {
+    console.log(err);
+  }
 
   //   .then((data) => {
   //   res

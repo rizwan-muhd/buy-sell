@@ -11,7 +11,7 @@
   /* margin-left: 2rem; */
 }
 .imageShowDiv img {
-  /* width:50%; */
+  width:100%;
   height: 60vh;
   padding: 3rem;
  
@@ -54,3 +54,19 @@
   font-weight: 400;
   padding: 0;
 }
+/* @media (min-width:1100px){
+  .productimg{
+    width:"100%";
+    text-align: center;
+    /* height:"60%"; */
+  /* } */
+/* } */ 
+
+@media (min-width:900px){
+  .imageShowDiv img {
+    width:"50%";
+    
+  
+  }
+}
+  

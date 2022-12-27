@@ -60,7 +60,12 @@ export default function Signup() {
   return (
     <div>
       <div className="signupParentDiv">
-        <img width="200px" height="200px" src={Logo} alt=""></img>
+        <img
+          width="100%"
+          height="200px"
+          src="https://thumbs.dreamstime.com/b/buy-sell-speech-bubble-showing-commerce-concept-49769909.jpg"
+          alt=""
+        ></img>
         <form onSubmit={handleSubmit}>
           <label htmlFor="fname">Username</label>
           <br />

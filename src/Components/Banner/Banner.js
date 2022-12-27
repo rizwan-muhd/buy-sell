@@ -111,10 +111,11 @@ function Banner() {
               <Typography sx={{ pt: 1, mx: 2 }}>Cars</Typography>
               <Typography sx={{ pt: 1, mx: 2 }}>Motorcycle</Typography>
               <Typography sx={{ pt: 1, mx: 2 }}>Mobile Phones</Typography>
-              <Typography sx={{ pt: 1, mx: 2 }}>Mobile Phones</Typography>
+              <Typography sx={{ pt: 1, mx: 2 }}>Laptops</Typography>
               <Typography sx={{ pt: 1, mx: 2 }} onClick={() => alert("mobile")}>
-                Mobile Phones
+                Food items
               </Typography>
+              <Typography sx={{ pt: 1, mx: 2 }}>Apartments</Typography>
             </Popover>
           </div>
           <div className="otherQuickOptions">

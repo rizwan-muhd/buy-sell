@@ -11,7 +11,6 @@ import Button from "@mui/material/Button";
 // import { Link } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
 
-import Logo from "../../olx-logo.png";
 import "./Login.css";
 
 const style = {
@@ -141,7 +140,12 @@ function Login() {
       >
         <Box sx={style}>
           {/* <div className="loginParentDiv"> */}
-          <img width="100%" height="200px" src={Logo} alt=""></img>
+          <img
+            width="100%"
+            height="200px"
+            src="https://thumbs.dreamstime.com/b/buy-sell-speech-bubble-showing-commerce-concept-49769909.jpg"
+            alt=""
+          ></img>
           {/* <form onSubmit={handleSubmit}> */}
           <label htmlFor="fname">Email</label>
           <br />

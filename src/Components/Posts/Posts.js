@@ -6,6 +6,9 @@ import "./Post.css";
 import Container from "@mui/system/Container";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
+import Checkbox from "@mui/material/Checkbox";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Favorite from "@mui/icons-material/Favorite";
 import Button from "@mui/material/Button";
 import { postDetailsContext } from "../../store/postContext";
 import { useHistory } from "react-router-dom";
@@ -18,6 +21,8 @@ function Posts() {
   const [page, setPage] = useState(0);
   const [totalpages, settotalPages] = useState(0);
   const { setPost } = useContext(postDetailsContext);
+
+  const label = { inputProps: { "aria-label": "Checkbox demo" } };
   useEffect(() => {
     fetch(`http://localhost:5000/api/getproducts?page=${page}`)
       .then((response) => response.json())
@@ -63,7 +68,12 @@ function Posts() {
                     }}
                   >
                     <div className="favorite">
-                      <Heart></Heart>
+                      {/* <Heart></Heart> */}
+                      <Checkbox
+                        {...label}
+                        icon={<FavoriteBorder />}
+                        checkedIcon={<Favorite />}
+                      />
                     </div>
                     <div className="image">
                       <img src={`../../../uploads/${item.image}`} alt="" />
@@ -92,24 +102,34 @@ function Posts() {
                     sx={{
                       margin: "10px",
                       textAlign: "start",
+                      height: "min-content",
                     }}
                     className="card"
                     value={key}
-                    onClick={() => {
-                      setPost(obj);
-                      localStorage.setItem("id", obj._id);
-                      history.push("/viewpost");
-                    }}
+                    // onClick={() => {
+                    //   setPost(obj);
+                    //   localStorage.setItem("id", obj._id);
+                    //   history.push("/viewpost");
+                    // }}
                   >
                     <div className="favorite">
-                      <Heart></Heart>
-                    </div>
-                    <div className="image">
-                      <img
-                        src={`../../../uploads/${obj.image}`}
-                        alt={obj.image}
+                      {/* <Heart></Heart> */}
+                      <Checkbox
+                        {...label}
+                        icon={<FavoriteBorder />}
+                        checkedIcon={<Favorite sx={{ color: "red" }} />}
                       />
                     </div>
+                    <Box
+                      className="image"
+                      onClick={() => {
+                        setPost(obj);
+                        localStorage.setItem("id", obj._id);
+                        history.push("/viewpost");
+                      }}
+                    >
+                      <img src={`/uploads/${obj.image}`} alt={obj.image} />
+                    </Box>
                     <div className="content">
                       <p className="rate">&#x20B9;{obj.price}</p>
                       <span className="kilometer">{obj.category}</span>

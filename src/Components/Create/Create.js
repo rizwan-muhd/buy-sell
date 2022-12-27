@@ -26,11 +26,11 @@ const Create = () => {
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [place, setPlace] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState([]);
 
   const imagehandleChange = (e) => {
     // setFilename(e.target.files);
-    setImage(e.target.files);
+    setImage(e.target.files[0]);
     console.log(e.target.files);
 
     if (e.target.files) {
@@ -64,7 +64,7 @@ const Create = () => {
     formdata.append("userId", userId);
     // console.log(form_data);
 
-    // console.log(filename);
+    console.log(image);
 
     //post request for submiting data to db
     // formsubmit(formdata);
@@ -74,7 +74,7 @@ const Create = () => {
     // axios.post("http://localhost:5000/api/addproduct", value);
     // try {
     axios.post("http://localhost:5000/api/addproduct", formdata).then((res) => {
-      // console.log(response);
+      console.log(res);
       history.push("/");
     });
     // } catch (error) {
@@ -174,7 +174,7 @@ const Create = () => {
             <input
               type="file"
               multiple
-              image="image"
+              name="image"
               onChange={imagehandleChange}
             />
             <br />

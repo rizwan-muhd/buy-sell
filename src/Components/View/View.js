@@ -37,7 +37,11 @@ function View() {
       <Grid container spacing={2}>
         <Grid item md={8} xs={12}>
           <div className="imageShowDiv">
-            <img src={`../../../uploads/${product.image}`} alt="" />
+            <img
+              src={`../../../uploads/${product.image}`}
+              alt=""
+              className="productimg"
+            />
           </div>
         </Grid>
         <Grid item md={4} xs={12}>

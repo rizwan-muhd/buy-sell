@@ -24,6 +24,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import AppleIcon from "@mui/icons-material/Apple";
 import Modal from "@mui/material/Modal";
 import Paper from "@mui/material/Paper";
+import Badge from "@mui/material/Badge";
 import { styled, alpha } from "@mui/material/styles";
 // import Badge from "@mui/material/Badge";
 import Logo from "../../olx-logo.png";
@@ -109,6 +110,9 @@ function ResponsiveAppBar() {
   });
   // const [userName, setuserName] = useState("");
 
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState([]);
+
   const [value, setValue] = React.useState(null);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -190,6 +194,9 @@ function ResponsiveAppBar() {
     } else if (setting === "Profile") {
       history.push("/profile");
     } else if (setting === "Account") {
+      // <Badge badgeContent={4} color="primary">
+      //   {setting}
+      // </Badge>;
       history.push("/account");
     }
   };
@@ -265,6 +272,7 @@ function ResponsiveAppBar() {
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
+              fontSize: 17,
               // letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
@@ -359,7 +367,12 @@ function ResponsiveAppBar() {
           >
             <Box sx={style}>
               {/* <div className="loginParentDiv"> */}
-              <img width="100%" height="200px" src={Logo} alt=""></img>
+              <img
+                width="100%"
+                height="200px"
+                src="https://thumbs.dreamstime.com/b/buy-sell-speech-bubble-showing-commerce-concept-49769909.jpg"
+                alt=""
+              ></img>
               {/* <form onSubmit={handleSubmit}> */}
               <label htmlFor="fname">Email</label>
               <br />
