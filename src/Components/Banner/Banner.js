@@ -1,6 +1,7 @@
+// react component importing
 import React, { useState } from "react";
-import MuiImageSlider from "mui-image-slider";
-import Paper from "@mui/material/Paper";
+// import MuiImageSlider from "mui-image-slider";
+// import Paper from "@mui/material/Paper";
 
 import "./Banner.css";
 // import Arrow from "../../assets/Arrow";
@@ -44,14 +45,6 @@ function Banner() {
     },
     { url: "https://static1.bigstockphoto.com/3/9/3/large2/393287000.jpg" },
   ];
-  // console.log(images);
-
-  // const [age, setAge] = useState("");
-
-  // const handleChange = (event) => {
-  //   setAge(event.target.value);
-  // };
-  // const handleDropdown = () => {};
 
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -112,7 +105,11 @@ function Banner() {
               <Typography sx={{ pt: 1, mx: 2 }}>Motorcycle</Typography>
               <Typography sx={{ pt: 1, mx: 2 }}>Mobile Phones</Typography>
               <Typography sx={{ pt: 1, mx: 2 }}>Laptops</Typography>
-              <Typography sx={{ pt: 1, mx: 2 }} onClick={() => alert("mobile")}>
+              <Typography
+                sx={{ pt: 1, mx: 2 }}
+                value="Food items"
+                onClick={() => alert("food items")}
+              >
                 Food items
               </Typography>
               <Typography sx={{ pt: 1, mx: 2 }}>Apartments</Typography>
@@ -173,34 +170,6 @@ function Banner() {
               position="static"
               activeStep={activeStep}
               sx={{ justifyContent: "center" }}
-              // nextButton={
-              //   <Button
-              //     size="small"
-              //     onClick={handleNext}
-              //     disabled={activeStep === maxSteps - 1}
-              //   >
-              //     Next
-              //     {theme.direction === "rtl" ? (
-              //       <KeyboardArrowLeft />
-              //     ) : (
-              //       <KeyboardArrowRight />
-              //     )}
-              //   </Button>
-              // }
-              // backButton={
-              //   <Button
-              //     size="small"
-              //     onClick={handleBack}
-              //     disabled={activeStep === 0}
-              //   >
-              //     {theme.direction === "rtl" ? (
-              //       <KeyboardArrowRight />
-              //     ) : (
-              //       <KeyboardArrowLeft />
-              //     )}
-              //     Back
-              //   </Button>
-              // }
             />
           </Box>
         </div>

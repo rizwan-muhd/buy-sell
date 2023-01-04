@@ -28,6 +28,8 @@ import Badge from "@mui/material/Badge";
 import { styled, alpha } from "@mui/material/styles";
 // import Badge from "@mui/material/Badge";
 import Logo from "../../olx-logo.png";
+import { useDispatch, useSelector } from "react-redux";
+import { searchItem } from "../../redux/navbar/action";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -87,6 +89,7 @@ const style = {
 //main function
 function ResponsiveAppBar() {
   //localstorage item getting
+  const dispatch = useDispatch();
   const user = localStorage.getItem("token");
   const userName = localStorage.getItem("userName");
 
@@ -201,6 +204,12 @@ function ResponsiveAppBar() {
     }
   };
 
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+    console.log(search);
+    dispatch(searchItem(search));
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -297,6 +306,7 @@ function ResponsiveAppBar() {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
+                onChange={handleSearch}
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
               />

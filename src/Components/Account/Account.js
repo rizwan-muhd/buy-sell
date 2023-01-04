@@ -69,7 +69,7 @@ function Account() {
         setItems(res.data.products);
         // console.log(items);
       });
-  }, []);
+  }, [userId]);
 
   const handleEdit = () => {
     setOpen(true);
@@ -103,72 +103,74 @@ function Account() {
           </Stack>
         )} */}
 
-        <Grid container spacing={2}>
-          {userName && (
-            <Grid item md={12} sx={{ textAlign: "end" }}>
-              <Link to="/create">
-                <Button variant="contained">+Add Product</Button>
-              </Link>
-            </Grid>
-          )}
-          <Snackbar
-            anchorOrigin={{ vertical, horizontal }}
-            open={open}
-            onClose={SnackhandleClose}
-            message="I love snacks"
-            key={vertical + horizontal}
-          />
-          {items.map((obj) => {
-            return (
-              <Grid item xs={12} sm={6} md={3}>
-                <Paper
-                  sx={{
-                    // margin: "10px",
-                    height: " max-content",
-                  }}
-                  className="card"
-                  // value={key}
-                  onClick={() => {
-                    // setPost(obj);
-                    // localStorage.setItem("id", obj._id);
-                    // history.push("/viewpost");
-                  }}
-                >
-                  <div className="favorite">
-                    <Typography variant="subtitle1">
-                      20
-                      <VisibilityIcon fontSize="3" />
-                    </Typography>
-                  </div>
-                  <div className="image">
-                    <img src={`../../../uploads/${obj.image}`} alt="" />
-                  </div>
-                  <div className="content">
-                    <p className="rate">&#x20B9;{obj.price}</p>
-                    <span className="kilometer">{obj.productname}</span>
-                    <p className="name" style={{ marginBottom: "0px" }}>
-                      {obj.category}
-                    </p>
-                  </div>
-                  <Grid container>
-                    <Grid item md={6}>
-                      {/* <div className="date"> */}
-                      <EditIcon color="primary" onClick={handleEdit} />
-                      <DeleteIcon
-                        color="error"
-                        onClick={() => handleDelete(obj._id)}
-                      />
-                    </Grid>
-                    <Grid item md={6} sx={{ fontSize: 12, textAlign: "end" }}>
-                      <span>{obj.date}</span>
-                      {/* </div> */}
-                    </Grid>
-                  </Grid>
-                </Paper>
+        {userId && (
+          <Grid container spacing={2}>
+            {userName && (
+              <Grid item md={12} sx={{ textAlign: "end" }}>
+                <Link to="/create">
+                  <Button variant="contained">+Add Product</Button>
+                </Link>
               </Grid>
-            );
-          })}
-        </Grid>
+            )}
+            <Snackbar
+              anchorOrigin={{ vertical, horizontal }}
+              open={open}
+              onClose={SnackhandleClose}
+              message="I love snacks"
+              key={vertical + horizontal}
+            />
+            {items.map((obj) => {
+              return (
+                <Grid item xs={12} sm={6} md={3}>
+                  <Paper
+                    sx={{
+                      // margin: "10px",
+                      height: " max-content",
+                    }}
+                    className="card"
+                    // value={key}
+                    onClick={() => {
+                      // setPost(obj);
+                      // localStorage.setItem("id", obj._id);
+                      // history.push("/viewpost");
+                    }}
+                  >
+                    <div className="favorite">
+                      <Typography variant="subtitle1">
+                        20
+                        <VisibilityIcon fontSize="3" />
+                      </Typography>
+                    </div>
+                    <div className="image">
+                      <img src={`../../../uploads/${obj.image}`} alt="" />
+                    </div>
+                    <div className="content">
+                      <p className="rate">&#x20B9;{obj.price}</p>
+                      <span className="kilometer">{obj.productname}</span>
+                      <p className="name" style={{ marginBottom: "0px" }}>
+                        {obj.category}
+                      </p>
+                    </div>
+                    <Grid container>
+                      <Grid item md={6}>
+                        {/* <div className="date"> */}
+                        <EditIcon color="primary" onClick={handleEdit} />
+                        <DeleteIcon
+                          color="error"
+                          onClick={() => handleDelete(obj._id)}
+                        />
+                      </Grid>
+                      <Grid item md={6} sx={{ fontSize: 12, textAlign: "end" }}>
+                        <span>{obj.date}</span>
+                        {/* </div> */}
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                </Grid>
+              );
+            })}
+          </Grid>
+        )}
         <div>
           {/* <Button onClick={handleOpen}>Open modal</Button> */}
           <Modal

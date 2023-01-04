@@ -11,16 +11,6 @@ const addproductRoute = require("./routes/products");
 const app = express();
 
 connection();
-// main().catch((err) => console.log(err));
-
-// async function main() {
-//   const MONGODB_URL =
-//     "mongodb+srv://user01:MC8biL0ifg0TCtTi@todoapp.ij4lfkd.mongodb.net/?retryWrites=true&w=majority";
-//   await mongoose.connect(MONGODB_URL, {
-//     useNewUrlParser: true,
-//   });
-// }
-// console.log(md5(123));
 
 app.use(express.json());
 app.use(cors());
