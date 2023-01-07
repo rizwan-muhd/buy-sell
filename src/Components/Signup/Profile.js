@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 // import { Form } from "react-final-form";
 
 //mui components importing
@@ -14,6 +15,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
+import CloseIcon from "@mui/icons-material/Close";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 // import { SettingsSystemDaydreamRounded } from "@mui/icons-material";
@@ -23,6 +25,7 @@ const theme = createTheme();
 //main function
 export default function Profile() {
   //user id getting
+  const history = useHistory();
   const userId = localStorage.getItem("userId");
 
   const [existingUser, setexistingUser] = useState({
@@ -80,6 +83,9 @@ export default function Profile() {
               borderRadius: 2,
             }}
           >
+            <Box sx={{ textAlign: "end", width: "100%" }}>
+              <CloseIcon onClick={() => history.push("/")} />
+            </Box>
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
@@ -103,9 +109,7 @@ export default function Profile() {
                     label="Username"
                     // value={existingUser.name}
                     // placeholder={existingUser.name}
-                    defaultValue={
-                      existingUser.name ? existingUser.name : "name"
-                    }
+                    defaultValue={existingUser.name}
                     // onChange={(e) => setName(e.target.value)}
                   />
                 </Grid>

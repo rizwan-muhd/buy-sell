@@ -1,19 +1,23 @@
+// React components importing
 import React, { useState, useEffect } from "react";
-import "../Posts/Post.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+// css importing
+import "../Posts/Post.css";
+
+// material components importing
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import Heart from "../../assets/Heart";
+// import Heart from "../../assets/Heart";
 import Snackbar from "@mui/material/Snackbar";
 import EditIcon from "@mui/icons-material/Edit";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import Stack from "@mui/material/Stack";
-import Alert from "@mui/material/Alert";
+// import Stack from "@mui/material/Stack";
+// import Alert from "@mui/material/Alert";
 // import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import TextField from "@mui/material/TextField";
@@ -23,7 +27,7 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import { Container } from "@mui/material";
-import { Flag } from "@mui/icons-material";
+// import { Flag } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -37,6 +41,7 @@ const style = {
   p: 4,
 };
 
+// main function begins
 function Account() {
   // const flag = false;
 
@@ -89,6 +94,7 @@ function Account() {
       vertical: "top",
       horizontal: "right",
     });
+    // setOpen(true);
   };
   // <Stack sx={{ width: "100%" }} spacing={2}>
   //   <Alert severity="success">Deleted succesfully!</Alert>;
@@ -109,6 +115,11 @@ function Account() {
               <Grid item md={12} sx={{ textAlign: "end" }}>
                 <Link to="/create">
                   <Button variant="contained">+Add Product</Button>
+                </Link>
+                <Link to="/">
+                  <Button variant="contained" sx={{ marginLeft: "1rem" }}>
+                    Close
+                  </Button>
                 </Link>
               </Grid>
             )}

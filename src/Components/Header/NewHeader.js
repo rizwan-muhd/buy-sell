@@ -206,8 +206,11 @@ function ResponsiveAppBar() {
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
-    console.log(search);
+    // console.log(search);
     dispatch(searchItem(search));
+  };
+  const searchFun = () => {
+    alert("searching");
   };
 
   return (
@@ -303,7 +306,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Search>
               <SearchIconWrapper>
-                <SearchIcon />
+                <SearchIcon onClick={searchFun} />
               </SearchIconWrapper>
               <StyledInputBase
                 onChange={handleSearch}

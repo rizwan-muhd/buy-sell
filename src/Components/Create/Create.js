@@ -30,7 +30,7 @@ const Create = () => {
 
   const imagehandleChange = (e) => {
     // setFilename(e.target.files);
-    setImage(e.target.files);
+    setImage(e.target.files[0]);
     console.log(e.target.files);
 
     if (e.target.files) {

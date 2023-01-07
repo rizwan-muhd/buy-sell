@@ -24,7 +24,7 @@ const upload = multer({ storage: storage });
 //   console.log("new body" + req.body);
 // });
 
-router.post("/addproduct", upload.array("image", 5), async (req, res) => {
+router.post("/addproduct", upload.single("image"), async (req, res) => {
   try {
     console.log(__dirname);
 

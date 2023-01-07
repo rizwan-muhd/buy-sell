@@ -12,9 +12,13 @@ import Favorite from "@mui/icons-material/Favorite";
 import Button from "@mui/material/Button";
 import { postDetailsContext } from "../../store/postContext";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 // import axios from "axios";
 
 function Posts() {
+  const searchItem = useSelector((state) => state.search);
+  console.log(searchItem);
+
   const history = useHistory();
   const [state, setState] = useState([]);
   // const [quickProducts, setquickProducts] = useState([]);
@@ -22,6 +26,7 @@ function Posts() {
   const [totalpages, settotalPages] = useState(0);
   const { setPost } = useContext(postDetailsContext);
 
+  var products = [];
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   useEffect(() => {
     fetch(`http://localhost:5000/api/getproducts?page=${page}`)
@@ -33,6 +38,7 @@ function Posts() {
         console.log(totalpages);
 
         console.log(state);
+        console.log(searchItem);
       });
     // .then(() => {
     //   axios.get("http://localhost:5000/api/getquickproducts").then((res) => {
@@ -41,11 +47,18 @@ function Posts() {
     // });
   }, [page]);
 
-  // useEffect(() => {
-  //   axios.get("http://localhost:5000/api/getquickproducts").then((res) => {
-  //     setquickProducts(res.data);
-  //   });
-  // }, []);
+  if (searchItem.length > 0) {
+    products = state.filter(
+      (item) =>
+        item.category.toLowerCase().includes(searchItem) ||
+        item.productname.toLowerCase().includes(searchItem)
+    );
+  } else {
+    console.log(state);
+
+    products = state;
+  }
+
   return (
     <Container>
       <Grid container>
@@ -96,7 +109,7 @@ function Posts() {
               <span>Fresh recommendations</span>
             </div>
             <div className="cards" id="itemcards">
-              {state.map((obj, key) => {
+              {products.map((obj, key) => {
                 return (
                   <Paper
                     sx={{
