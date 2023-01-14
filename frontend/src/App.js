@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 2000);
   }, []);
   const [loading, setLoading] = useState(true);
   const user = localStorage.getItem("token");

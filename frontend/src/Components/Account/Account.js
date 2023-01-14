@@ -72,8 +72,10 @@ function Account() {
       .then((res) => {
         // console.log(res.data.products);
         setItems(res.data.products);
-        // console.log(items);
       });
+    // return () => {
+    //   items = [];
+    // };
   }, [userId]);
 
   const handleEdit = () => {

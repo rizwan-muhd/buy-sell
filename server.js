@@ -7,7 +7,7 @@ const connection = require("./database/db.js");
 const signupRoute = require("./routes/signup");
 const loginRoute = require("./routes/login");
 const addproductRoute = require("./routes/products");
-
+const PORT = process.env.PORT;
 const app = express();
 
 connection();
@@ -18,6 +18,10 @@ app.use("/api", signupRoute);
 app.use("/api", loginRoute);
 app.use("/api", addproductRoute);
 
-app.listen(5000, () => {
-  console.log("server running on port 5000");
-});
+if (PORT) {
+  app.listen(PORT, () => {
+    console.log(`server running on port ${PORT}`);
+  });
+}
+
+module.exports = app;

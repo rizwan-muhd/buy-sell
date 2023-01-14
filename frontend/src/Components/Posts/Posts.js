@@ -50,8 +50,8 @@ function Posts() {
   if (searchItem.length > 0) {
     products = state.filter(
       (item) =>
-        item.category.toLowerCase().includes(searchItem) ||
-        item.productname.toLowerCase().includes(searchItem)
+        item.category.toLowerCase().includes(searchItem.toLowerCase()) ||
+        item.productname.toLowerCase().includes(searchItem.toLowerCase())
     );
   } else {
     console.log(state);

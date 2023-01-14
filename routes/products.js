@@ -8,7 +8,7 @@ const router = express();
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    let dest = path.join(__dirname, "../../public/uploads");
+    let dest = path.join(__dirname, "../frontend/public/uploads");
     callback(null, dest);
   },
   filename: (req, file, callback) => {
@@ -104,7 +104,7 @@ router.get("/getproducts", async (req, res) => {
   const total = await productSchema.countDocuments({});
   // console.log(total_page);
 
-  const page_size = 7;
+  const page_size = 6;
 
   const products = await productSchema
     .find({})
