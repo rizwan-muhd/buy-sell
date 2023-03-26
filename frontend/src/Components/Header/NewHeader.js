@@ -3,6 +3,7 @@ import * as React from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 //mui components importing
 import AppBar from "@mui/material/AppBar";
@@ -30,6 +31,7 @@ import { styled, alpha } from "@mui/material/styles";
 import Logo from "../../olx-logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { searchItem } from "../../redux/navbar/action";
+import { GoogleLoginButton } from "react-social-login-buttons";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -97,11 +99,11 @@ function ResponsiveAppBar() {
   // console.log(userName.slice(0, 1));
   const pages = ["home", "favourites", "products"];
 
-  const settings = ["Profile", "Account"];
+  const settings = ["Profile"];
   if (user) {
-    settings.push("Logout");
+    settings.push("Account", "Logout");
   } else {
-    settings.push("Login");
+    settings.push("SignUp", "Login");
   }
   const history = useHistory();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -177,8 +179,11 @@ function ResponsiveAppBar() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    alert("hello");
+  const handleCloseNavMenu = (page) => {
+    // alert("hello");
+    if (page === "favourites") {
+      history.push("/favourites");
+    }
 
     setAnchorElNav(null);
   };
@@ -211,6 +216,10 @@ function ResponsiveAppBar() {
   };
   const searchFun = () => {
     alert("searching");
+  };
+
+  const googleAuth = () => {
+    window.open("http://localhost:5000/api/google/callback", "_self");
   };
 
   return (
@@ -296,7 +305,7 @@ function ResponsiveAppBar() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => handleCloseNavMenu(page)}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
@@ -418,11 +427,12 @@ function ResponsiveAppBar() {
                 >
                   Or Login With
                 </Typography>
-                <Paper sx={{ textAlign: "center", my: 1, p: 1 }}>
+                <GoogleLoginButton onClick={googleAuth} />
+                {/* <Paper sx={{ textAlign: "center", my: 1, p: 1 }}>
                   <GoogleIcon sx={{ mr: 1 }} />
-
-                  <AppleIcon />
-                </Paper>
+                 
+                  {/* <AppleIcon /> */}
+                {/* </Paper> */}
               </Box>
 
               <br />
@@ -434,6 +444,12 @@ function ResponsiveAppBar() {
                 <Paper>
                   <a href="/signup">Signup</a>
                 </Paper>
+              </Box>
+
+              <Box>
+                <Link to="/passwordreset">
+                  <p>reset password?</p>
+                </Link>
               </Box>
 
               {/* </div> */}

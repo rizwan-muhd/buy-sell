@@ -31,7 +31,7 @@ router.post("/addproduct", upload.single("image"), async (req, res) => {
     console.log("enter in try");
 
     console.log(req.body);
-    console.log(req.files);
+    console.log(req.file);
 
     const items = await new productSchema({
       productname: req.body.productname,

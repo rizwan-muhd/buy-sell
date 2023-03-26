@@ -181,7 +181,7 @@ function Login() {
             <Paper sx={{ textAlign: "center", my: 1, p: 1 }}>
               <GoogleIcon sx={{ mr: 1 }} />
 
-              <AppleIcon />
+              {/* <AppleIcon /> */}
             </Paper>
           </Box>
 

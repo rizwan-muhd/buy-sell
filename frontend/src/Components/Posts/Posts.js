@@ -13,7 +13,7 @@ import Button from "@mui/material/Button";
 import { postDetailsContext } from "../../store/postContext";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import axios from "axios";
+import axios from "axios";
 
 function Posts() {
   const searchItem = useSelector((state) => state.search);

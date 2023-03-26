@@ -1,20 +1,13 @@
 const router = require("express").Router();
-const { User } = require("../modals/modal");
+const { User, validate } = require("../modals/modal");
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
+const passwordComplexity = require("joi-password-complexity");
+const passport = require("passport");
 
 router.post("/login", async (req, res) => {
   try {
-    // console.log("entered in try");
-    // console.log(req.body);
-    // const { error } = validate(req.body);
-    // console.log("body", error);
-    // const error = req.body;
-    // console.log(req.body);
-
-    // if (error) {
-    //   return res.status(400).send({ message: error.details[0].message });
-    // }
     const user = await User.findOne({ email: req.body.email });
 
     if (!user) {
@@ -37,36 +30,65 @@ router.post("/login", async (req, res) => {
     res
       .status(200)
       .send({ data: token, user: user, message: "logged successfully" });
-
-    // const email = req.body.email;
-    // router.get("/login", async (req, res, email) => {
-    //   // console.log(req.body);
-
-    //   await User.findOne({ email: email }, (err, result) => {
-    //     if (err) {
-    //       res.send(err);
-    //     }
-    //     res.status(200).send(result);
-    //   });
-    // });
-
-    //   await User.findOne({ email: req.body.email }, (err, result) => {
-    //     if (err) {
-    //       res.send(err);
-    //     }
-    //     res.status(200).send(result);
-    //   });
   } catch (error) {
     res.status(500).send({ message: "internal error" });
   }
 });
+// password reset
 
-const validate = (data) => {
-  const schema = Joi.oblect({
-    email: Joi.string().email().required().label("email"),
-    password: Joi.string().required().label("password"),
+router.put("/resetpassword", async (req, res) => {
+  try {
+    const { error } = validate(req.body);
+    if (error) {
+      return res.status(400).send({ message: error.details[0].message });
+    }
+    const user = await User.findOne({ email: req.body.email });
+
+    if (!user) {
+      return res.status(409).send({ message: "invalid email address" });
+    }
+    let token = await token.findOne({ userId: user_id });
+    if (!token) {
+      const token = user.generateAuthToken();
+    }
+  } catch (error) {}
+});
+
+// const validate = (data) => {
+//   const schema = Joi.oblect({
+//     email: Joi.string().email().required().label("email"),
+//     password: Joi.string().required().label("password"),
+//   });
+//   return schema.validate(data);
+// };
+router.get("/Googlelogin/success", (req, res) => {
+  if (req.user) {
+    res.status(200).json({
+      error: false,
+      message: "succesfully loged in",
+      user: req.user,
+    });
+  } else {
+    res.status(403).json({ error: true, message: "not authorized" });
+  }
+});
+
+router.get("/Googlelogin/failed", (req, res) => {
+  res.status(401).json({
+    error: true,
+    message: "login in failure",
   });
-  return schema.validate(data);
-};
+});
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    successRedirect: process.env.CLIENT_URL,
+    // successRedirect: "/Googlelogin/success",
+    failureRedirect: "/Googlelogin/failed",
+  })
+);
+
+router.get("/google", passport.authenticate("google", ["profile", "email"]));
 
 module.exports = router;

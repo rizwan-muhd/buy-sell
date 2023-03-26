@@ -29,22 +29,6 @@ router.post("/signup", async (req, res) => {
   } catch (error) {
     res.status(500).send({ message: "internal server error" });
   }
-
-  // const userDetails = new userSchema({
-  //   name: req.body.name,
-  //   email: req.body.email,
-  //   phone: req.body.phone,
-  //   password: req.body.password,
-  // });
-  // userDetails
-  //   .save()
-  //   .then((data) => {
-  //     res.status(200).json(data);
-  //     // res.render("Home.js")
-  //   })
-  //   .catch((err) => {
-  //     res.status(401).json(err);
-  //   });
 });
 
 //get userdata
@@ -58,5 +42,21 @@ router.get("/getuser", async (req, res) => {
 });
 
 router.post("/userupdate", (req, res) => {});
-
+router.post("/addToFavourites", async (req, res) => {
+  try {
+    // console.log(req.body);
+    const userData = await User.findOne({ _id: req.query.userId });
+    userData.favourites.push(req.query.productId);
+    await userData.save();
+    res.status(201).json({
+      status: true,
+      message: "Done",
+    });
+  } catch (error) {
+    res.status(401).json({
+      status: false,
+      message: "Cant fetch",
+    });
+  }
+});
 module.exports = router;
